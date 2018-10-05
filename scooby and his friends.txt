@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef long long ll;
+int t;
+ll a,b,n;
+ 
+int main(){
+	scanf("%d",&t);
+	while(t--){
+		scanf("%lld%lld%lld",&a,&b,&n);
+		if(b==0){
+			printf("1\n");
+			continue;
+		}
+		long long lcm = (n/__gcd(n,b))*b;
+		printf("%lld\n",lcm/b);
+ 
+	}
+	
+	
+}

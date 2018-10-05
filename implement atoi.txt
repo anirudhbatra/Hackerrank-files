@@ -1,0 +1,62 @@
+/*
+Please note that it's Function problem i.e.
+you need to write your solution in the form Function(s) only.
+Driver Code to call/invoke your function would be added by GfG's Online Judge.*/
+
+
+/*You are required to complete this method */
+
+
+int atoi(string str)
+{
+    
+	int n=str.length();
+    
+	int no=0,flag=0;
+    
+
+	for(int i=0;i<n;i++){
+        
+		if(str[i]=='-'){
+            
+			flag=2;
+            continue;
+        
+		}
+        
+	
+		int mul=pow(10,(n-i-1));
+        
+		int dig=str[i]-'0';
+        
+		if(str[i]>'9'){
+            
+			flag++;
+            
+			break;
+        
+		}
+        
+
+		no=no+(mul*dig);
+    
+	}
+    
+
+	if(flag==0)
+        
+		return no;
+    
+	else if(flag==1)
+        
+		return -1;
+    
+	else{
+        
+		no*=-1;
+        
+		return no;
+    
+	}
+    //Your code here
+}

@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+inline int gcd(int x, int y)
+{
+int r=0, a, b;
+a = (x > y) ? x : y; // a is greater number
+b = (x < y) ? x : y; // b is smaller number
+
+r = b;
+while(a % b != 0)
+{
+r = a % b;
+a = b;
+b = r;
+}
+return r;
+}
+
+int main()
+{
+int t;
+cin>>t;
+int arr[t+1];
+for(int i=1;i<=t;i++)
+cin>>arr[i];
+cin>>t;
+for(int i=1;i<=t;i++)
+{
+char op;
+cin>>op;
+int X,Y;
+cin>>X>>Y;
+
+
+if(op == 'C')
+{
+long result = 0;
+for(int p=X;p<=Y;p++)
+{
+for(int j=1;j<=arr[p];j++)
+{
+
+result = result + gcd(j,arr[p]);
+//System.out.println("Y : "+ " " + j + " " + result);
+}
+}
+cout<<result<<endl;
+}
+else
+{
+arr[X] = Y;
+}
+}
+return 0;
+}

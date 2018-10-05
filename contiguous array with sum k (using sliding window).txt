@@ -1,0 +1,79 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define f(a,b,c) for(a=b;a<c;a++)
+
+#define swap(a,b) {a=a+b;b=a-b;a=a-b;}
+
+typedef long long int ll;
+
+#define d(t) int t;cin>>t;while(t--)
+
+#define s(n) scanf("%d",&n);
+
+#define p(n) printf("%d",n);
+
+#define pnl  printf("\n");
+
+
+int main()
+{
+    
+int i,j,n,k,sum;
+    
+d(t)
+    {
+        
+s(n) s(k)
+        
+int a[n];
+        
+f(i,0,n)
+            s(a[i])
+        
+
+int flag=0;
+        
+i=0;j=0;sum=a[0];
+        
+while(i<n)
+        {
+            
+	if(sum<k)
+            {
+                
+		j++;
+                
+		sum+=a[j];
+           
+	 }
+            
+	else if(sum>k)
+            {
+                
+		sum=sum-a[i];
+                
+		i++;
+            
+	}
+
+        else
+            {
+                
+		flag=1;
+                
+		break;
+            
+	}
+        
+}
+        
+if(flag==1)
+            cout<<i+1<<" "<<j+1<<"\n";
+        
+else cout<<"-1\n";
+    
+}
+
+}

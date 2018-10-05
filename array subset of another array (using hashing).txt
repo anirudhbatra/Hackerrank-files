@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    
+int t;
+    
+cin>>t;
+    
+for(int i=0;i<t;i++){
+        
+int n,k;
+        
+unordered_set<int> S;
+        
+cin>>n>>k;
+        
+int a[n],b[k];
+        
+for(int j=0;j<n;j++)    cin>>a[j];
+        
+for(int j=0;j<k;j++)    cin>>b[j];
+        
+sort(a,a+n);
+        
+sort(b,b+k);
+        
+for(int j=0;j<n;j++)    S.insert(a[j]);
+        
+for(int j=0;j<k;j++){
+            
+if(S.find(b[j])==S.end()){
+                
+cout<<"No";
+                
+goto p;
+            }
+        
+}
+        
+cout<<"Yes"<<endl;
+        
+continue;
+        
+p: cout<<endl;
+    
+}
+	//code
+	
+return 0;
+}

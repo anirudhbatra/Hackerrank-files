@@ -1,0 +1,13 @@
+unordered_set<int> S;
+int ans=0;
+for(int i=0;i<n;i++)	S.insert(a[i]);
+for(int i=0;i<n;i++){
+if(S.find(a[i]-1)==S.end()){
+int j=a[i];
+while(S.find(j)!=S.end())
+j++;
+
+ans=max(ans,j-a[i]);
+}
+}
+return ans;

@@ -1,0 +1,63 @@
+// FLAW IN THIS CODE:
+/*If you’re keen eyed, you likely noticed a flaw in our code above. Consider what happens when we’re exploring from our initial position of B3. From B3, we’ll try going up first, leading us to explore B2. From there, we’ll try up again and go to B1. B1 won’t work (there’s a ‘*’ there), so that will return false and we’ll be back considering B2. Since up didn’t work, we’ll try down, and thus we’ll consider B3. And from B3, we’ll consider B2 again. This will continue on until we error out: there’s an infinite cycle.
+
+We’ve forgotten one of our rules of thumb: we need to make sure the problem we’re considering is somehow getting smaller or simpler with each recursive call. In this case, testing whether we can reach the end from B2 is no simpler than considering whether we can reach the end from B3. Here we can get a clue from real-life mazes: if you feel like you’ve seen this place before, then you may be going in circles. We need to revise our mission statement to include “avoid exploring from any position we’ve already considered”. As the number of places we’ve considered grows, the problem gets simpler and simpler because each decision will have less valid options.
+
+The remaining problem is, then, “how do we keep track of places we’ve already considered?”. A good solution would be to pass around another 2 dimensional array of true/false values that would contain a “true” for each grid cell we’ve already been to. A quicker-and-dirtier way would be to change maze itself, replacing the current position with a ‘*’ just before we make any recursive calls. This way, when any future path comes back to the point we’re considering, it’ll know that it went in a circle and doesn’t need to continue exploring. Either way, we need to make sure we mark the current point as visited before we make the recursive calls, as otherwise we won’t avoid the infinite cycle.
+LINK: https://www.topcoder.com/community/data-science/data-science-tutorials/an-introduction-to-recursion-part-2/ */
+
+function isMazeSolveable(maze[][])
+{
+    declare variables x,y,startX,startY
+    startX=-1
+    startY=-1
+
+    // Look through grid to find our starting point
+    for each x from A to H
+    {
+        for each y from 1 to 8
+        {
+            if maze[x][y]=='S' then 
+            {
+                startX=x
+                startY=y
+            }
+        }
+    }
+
+    // If we didn't find starting point, maze isn't solveable
+    if startX==-1 then return false  
+
+    // If we did find starting point, start exploring from that point
+    return exploreMaze(maze[][],startX,startY)
+}
+
+function exploreMaze(maze[][],x,y)
+{
+    // If the current position is off the grid, then
+    // we can't keep going on this path
+    if y>8 or y<1 or x<'A' or x>'H' then return false
+
+    // If the current position is a '*', then we
+    // can't continue down this path
+    if maze[x][y]=='*' then return false
+
+    // If the current position is an 'E', then 
+    // we're at the end, so the maze is solveable.
+    if maze[x][y]=='E' then return true
+
+    // Otherwise, keep exploring by trying each possible
+    // next decision from this point.  If any of the options
+    // allow us to solve the maze, then return true.  We don't
+    // have to worry about going off the grid or through a wall - 
+    // we can trust our recursive call to handle those possibilities
+    // correctly.
+    if exploreMaze(maze,x,y-1) then return true  // search up
+    if exploreMaze(maze,x,y+1) then return true  // search down
+    if exploreMaze(maze,x-1,y) then return true  // search left
+    if exploreMaze(maze,x+1,y) then return true  // search right
+
+    // None of the options worked, so we can't solve the maze
+    // using this path.
+    return false
+}

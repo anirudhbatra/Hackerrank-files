@@ -1,0 +1,24 @@
+#include <cstdio>
+#include <string>
+
+std::string complement(std::string s) {
+	for (char &c : s) {
+		c = (char)('0' + '1' - c);
+	}
+	return s;
+}
+
+int main() {
+	std::string s = "0";
+	for (int i = 0; i < 10; i++) {
+		s = s + complement(s);
+	}
+	int q;
+	scanf("%d", &q);
+	for (int i = 0; i < q; i++) {
+		int x;
+		scanf("%d", &x);
+		printf("%c\n", s[x]);
+	}
+	return 0;
+}
